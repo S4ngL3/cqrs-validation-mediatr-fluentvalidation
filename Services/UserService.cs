@@ -46,5 +46,16 @@ namespace Services
 
             return user.Adapt<UserDto>();
         }
+
+        public async Task<UserDto> UpdateUserAsync(int id, UserForUpdateDto userForUpdateDto, CancellationToken cancellationToken = default)
+        {
+            var user = userForUpdateDto.Adapt<User>();
+
+            _repositoryManager.UserRepository.Update(user);
+
+            await _repositoryManager.UnitOfWork.SaveChangesAsync(cancellationToken);
+
+            return user.Adapt<UserDto>();
+        }
     }
 }

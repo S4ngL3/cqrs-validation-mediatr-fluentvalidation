@@ -2,18 +2,7 @@
 {
     public sealed class User
     {
-        public User(string firstName, string lastName)
-             : this()
-        {
-            FirstName = firstName;
-            LastName = lastName;
-        }
-
-        private User()
-        {
-        }
-
-        public int Id { get; private set; }
+        public int Id { get; set; }
 
         public string FirstName { get; set; }
 
