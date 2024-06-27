@@ -1,4 +1,4 @@
-﻿namespace Domain.Exceptions
+﻿namespace Contracts.Exceptions
 {
     public sealed class UserNotFoundException : NotFoundException
     {

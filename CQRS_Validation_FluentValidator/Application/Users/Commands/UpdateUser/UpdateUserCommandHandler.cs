@@ -1,8 +1,8 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using Application.Abstractions.Messaging;
-using Domain.Exceptions;
-using Domain.Repositories;
+using Contracts.Exceptions;
+using Contracts.Repositories;
 using MediatR;
 
 namespace Application.Users.Commands.UpdateUser

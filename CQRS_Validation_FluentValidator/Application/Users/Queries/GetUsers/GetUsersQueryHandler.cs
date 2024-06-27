@@ -3,22 +3,24 @@ using System.Threading;
 using System.Threading.Tasks;
 using Application.Abstractions.Messaging;
 using Application.Contracts.Users;
-using Domain.Repositories;
+using Contracts.Dtos.Users;
+using Contracts.Repositories;
 using Mapster;
+using Services;
 
 namespace Application.Users.Queries.GetUsers
 {
-    internal sealed class GetUsersQueryHandler : IQueryHandler<GetUsersQuery, List<UserResponse>>
+    internal sealed class GetUsersQueryHandler : IQueryHandler<GetUsersQuery, IEnumerable<UserDto>>
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IServiceManager _serviceManager;
 
-        public GetUsersQueryHandler(IUserRepository userRepository) => _userRepository = userRepository;
+        public GetUsersQueryHandler(IServiceManager serviceManager) => _serviceManager = serviceManager;
 
-        public async Task<List<UserResponse>> Handle(GetUsersQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<UserDto>> Handle(GetUsersQuery request, CancellationToken cancellationToken)
         {
-            var users = await _userRepository.GetAsync(cancellationToken);
+            var users = await _serviceManager.UserService.GetAllAsync(cancellationToken);
 
-            return users.Adapt<List<UserResponse>>();
+            return users;
         }
     }
 }

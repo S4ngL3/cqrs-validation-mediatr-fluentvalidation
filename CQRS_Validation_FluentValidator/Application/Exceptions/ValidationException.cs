@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using ApplicationException = Domain.Exceptions.ApplicationException;
+using ApplicationException = Contracts.Exceptions.ApplicationException;
 
 namespace Application.Exceptions
 {

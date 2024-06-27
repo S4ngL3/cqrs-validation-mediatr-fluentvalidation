@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Application.Exceptions;
-using Domain.Exceptions;
+using Contracts.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using ApplicationException = Domain.Exceptions.ApplicationException;
+using ApplicationException = Contracts.Exceptions.ApplicationException;
 
 namespace Web.Middleware
 {

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Domain.Entities;
+using Contracts.Entities;
 
-namespace Domain.Repositories
+namespace Contracts.Repositories
 {
     public interface IUserRepository
     {

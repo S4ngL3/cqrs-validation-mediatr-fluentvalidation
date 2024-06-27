@@ -6,6 +6,7 @@ using Application.Users.Commands.CreateUser;
 using Application.Users.Commands.UpdateUser;
 using Application.Users.Queries.GetUserById;
 using Application.Users.Queries.GetUsers;
+using Contracts.Dtos.Users;
 using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -34,7 +35,7 @@ namespace Presentation.Controllers
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>The collection of users.</returns>
         [HttpGet]
-        [ProducesResponseType(typeof(List<UserResponse>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<UserDto>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetUsers(CancellationToken cancellationToken)
         {
             var query = new GetUsersQuery();

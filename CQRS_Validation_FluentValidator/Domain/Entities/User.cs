@@ -1,4 +1,4 @@
-﻿namespace Domain.Entities
+﻿namespace Contracts.Entities
 {
     public sealed class User
     {
@@ -15,9 +15,9 @@
 
         public int Id { get; private set; }
 
-        public string FirstName { get; private set; }
+        public string FirstName { get; set; }
 
-        public string LastName { get; private set; }
+        public string LastName { get; set; }
 
         public void Update(string firstName, string lastName) => (FirstName, LastName) = (firstName, lastName);
     }

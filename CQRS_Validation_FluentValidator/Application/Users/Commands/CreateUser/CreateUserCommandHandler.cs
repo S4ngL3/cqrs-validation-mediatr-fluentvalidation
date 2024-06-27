@@ -2,32 +2,30 @@
 using System.Threading.Tasks;
 using Application.Abstractions.Messaging;
 using Application.Contracts.Users;
-using Domain.Entities;
-using Domain.Repositories;
+using Contracts.Dtos.Users;
+using Contracts.Entities;
+using Contracts.Repositories;
 using Mapster;
+using Services;
 
 namespace Application.Users.Commands.CreateUser
 {
-    internal sealed class CreateUserCommandHandler : ICommandHandler<CreateUserCommand, UserResponse>
+    internal sealed class CreateUserCommandHandler : ICommandHandler<CreateUserCommand, UserDto>
     {
-        private readonly IUserRepository _userRepository;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IServiceManager _serviceManager;
+        private readonly IRepositoryManager _repositoryManager;
 
-        public CreateUserCommandHandler(IUserRepository userRepository, IUnitOfWork unitOfWork)
+        public CreateUserCommandHandler(IServiceManager serviceManager, IRepositoryManager repositoryManager)
         {
-            _userRepository = userRepository;
-            _unitOfWork = unitOfWork;
+            _serviceManager = serviceManager;
+            _repositoryManager = repositoryManager;
         }
 
-        public async Task<UserResponse> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+        public async Task<UserDto> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-            var user = new User(request.FirstName, request.LastName);
+            var userForCreateDto = request.Adapt<UserForCreateDto>();
 
-            _userRepository.Insert(user);
-
-            await _unitOfWork.SaveChangesAsync(cancellationToken);
-
-            return user.Adapt<UserResponse>();
+            return await _serviceManager.UserService.CreateUserAsync(userForCreateDto, cancellationToken);
         }
     }
 }

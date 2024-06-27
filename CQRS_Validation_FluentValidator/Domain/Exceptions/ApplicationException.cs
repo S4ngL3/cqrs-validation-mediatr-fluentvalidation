@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Domain.Exceptions
+namespace Contracts.Exceptions
 {
     public abstract class ApplicationException : Exception
     {

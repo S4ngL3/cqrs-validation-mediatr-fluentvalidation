@@ -1,4 +1,4 @@
-﻿using Domain.Entities;
+﻿using Contracts.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
