@@ -1,35 +1,28 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using Application.Abstractions.Messaging;
-using Contracts.Exceptions;
-using Contracts.Repositories;
+﻿using Application.Abstractions.Messaging;
+using Contracts.Dtos.Users;
+using Mapster;
 using MediatR;
+using Services;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Application.Users.Commands.UpdateUser
 {
     internal sealed class UpdateUserCommandHandler : ICommandHandler<UpdateUserCommand, Unit>
     {
-        private readonly IUserRepository _userRepository;
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IServiceManager _serviceManager;
 
-        public UpdateUserCommandHandler(IUserRepository userRepository, IUnitOfWork unitOfWork)
+        public UpdateUserCommandHandler(IServiceManager serviceManager)
         {
-            _userRepository = userRepository;
-            _unitOfWork = unitOfWork;
+            _serviceManager = serviceManager;
         }
 
         public async Task<Unit> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
         {
-            var user = await _userRepository.GetByIdAsync(request.UserId, cancellationToken);
+            var userForUpdateDto = request.Adapt<UserForUpdateDto>();
 
-            if (user is null)
-            {
-                throw new UserNotFoundException(request.UserId);
-            }
+            await _serviceManager.UserService.UpdateUserAsync(request.UserId, userForUpdateDto, cancellationToken);
 
-            user.Update(request.FirstName, request.LastName);
-
-            await _unitOfWork.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;
         }

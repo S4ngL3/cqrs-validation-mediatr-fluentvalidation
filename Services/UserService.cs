@@ -1,13 +1,9 @@
 ﻿using Contracts.Dtos.Users;
 using Contracts.Entities;
+using Contracts.Exceptions;
 using Contracts.Repositories;
 using Mapster;
 using Services.Abstractions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Services
 {
@@ -47,15 +43,34 @@ namespace Services
             return user.Adapt<UserDto>();
         }
 
-        public async Task<UserDto> UpdateUserAsync(int id, UserForUpdateDto userForUpdateDto, CancellationToken cancellationToken = default)
+        public async Task UpdateUserAsync(int id, UserForUpdateDto userForUpdateDto, CancellationToken cancellationToken = default)
         {
-            var user = userForUpdateDto.Adapt<User>();
+            var user = await _repositoryManager.UserRepository.GetByIdAsync(id, cancellationToken);
+
+            if (user == null)
+            {
+                throw new UserNotFoundException(id);
+            }
+
+            user.FirstName = userForUpdateDto.FirstName;
+            user.LastName = userForUpdateDto.LastName;
 
             _repositoryManager.UserRepository.Update(user);
 
             await _repositoryManager.UnitOfWork.SaveChangesAsync(cancellationToken);
+        }
+        public async Task DeleteAsync(int id, CancellationToken cancellationToken = default)
+        {
+            var user = await _repositoryManager.UserRepository.GetByIdAsync(id, cancellationToken);
 
-            return user.Adapt<UserDto>();
+            if (user == null)
+            {
+                throw new UserNotFoundException(id);
+            }
+
+            _repositoryManager.UserRepository.Delete(user);
+
+            await _repositoryManager.UnitOfWork.SaveChangesAsync(cancellationToken);
         }
     }
 }

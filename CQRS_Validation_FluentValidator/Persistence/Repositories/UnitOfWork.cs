@@ -1,6 +1,6 @@
-﻿using System.Threading;
+﻿using Contracts.Repositories;
+using System.Threading;
 using System.Threading.Tasks;
-using Contracts.Repositories;
 
 namespace Persistence.Repositories
 {

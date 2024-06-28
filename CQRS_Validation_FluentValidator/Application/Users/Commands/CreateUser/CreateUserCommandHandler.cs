@@ -1,24 +1,19 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using Application.Abstractions.Messaging;
-using Application.Contracts.Users;
+﻿using Application.Abstractions.Messaging;
 using Contracts.Dtos.Users;
-using Contracts.Entities;
-using Contracts.Repositories;
 using Mapster;
 using Services;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Application.Users.Commands.CreateUser
 {
     internal sealed class CreateUserCommandHandler : ICommandHandler<CreateUserCommand, UserDto>
     {
         private readonly IServiceManager _serviceManager;
-        private readonly IRepositoryManager _repositoryManager;
 
-        public CreateUserCommandHandler(IServiceManager serviceManager, IRepositoryManager repositoryManager)
+        public CreateUserCommandHandler(IServiceManager serviceManager)
         {
             _serviceManager = serviceManager;
-            _repositoryManager = repositoryManager;
         }
 
         public async Task<UserDto> Handle(CreateUserCommand request, CancellationToken cancellationToken)

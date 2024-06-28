@@ -1,5 +1,4 @@
 ﻿using Application.Abstractions.Messaging;
-using Application.Contracts.Users;
 using Contracts.Dtos.Users;
 
 namespace Application.Users.Queries.GetUserById

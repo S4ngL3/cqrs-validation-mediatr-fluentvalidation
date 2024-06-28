@@ -1,12 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Application.Abstractions.Messaging;
+using Contracts.Dtos.Users;
+using Services;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Application.Abstractions.Messaging;
-using Application.Contracts.Users;
-using Contracts.Dtos.Users;
-using Contracts.Repositories;
-using Mapster;
-using Services;
 
 namespace Application.Users.Queries.GetUsers
 {

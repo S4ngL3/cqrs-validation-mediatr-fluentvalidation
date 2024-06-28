@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using Application.Abstractions.Messaging;
-using Application.Contracts.Users;
+﻿using Application.Abstractions.Messaging;
 using Contracts.Dtos.Users;
+using System.Collections.Generic;
 
 namespace Application.Users.Queries.GetUsers
 {

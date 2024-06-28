@@ -1,14 +1,13 @@
-﻿using System;
+﻿using Contracts.Entities;
+using Contracts.Repositories;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Contracts.Entities;
-using Contracts.Repositories;
-using Microsoft.EntityFrameworkCore;
 
 namespace Persistence.Repositories
 {
-    public  sealed class UserRepository : IUserRepository
+    public sealed class UserRepository : IUserRepository
     {
         private readonly ApplicationDbContext _dbContext;
 
@@ -21,5 +20,8 @@ namespace Persistence.Repositories
             _dbContext.Users.FirstOrDefaultAsync(user => user.Id == userId, cancellationToken);
 
         public void Insert(User user) => _dbContext.Users.Add(user);
+
+        public void Update(User user) => _dbContext.Users.Update(user);
+        public void Delete(User user) => _dbContext.Users.Remove(user);
     }
 }

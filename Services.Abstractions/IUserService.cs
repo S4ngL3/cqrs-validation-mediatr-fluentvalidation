@@ -1,9 +1,4 @@
 ﻿using Contracts.Dtos.Users;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Services.Abstractions
 {
@@ -12,6 +7,7 @@ namespace Services.Abstractions
         Task<IEnumerable<UserDto>> GetAllAsync(CancellationToken cancellationToken = default);
         Task<UserDto> GetUserByIdAsync(int id, CancellationToken cancellationToken = default);
         Task<UserDto> CreateUserAsync(UserForCreateDto userForCreateDto, CancellationToken cancellationToken = default);
-        Task<UserDto> UpdateUserAsync(int id, UserForUpdateDto userForUpdateDto, CancellationToken cancellationToken = default);
+        Task UpdateUserAsync(int id, UserForUpdateDto userForUpdateDto, CancellationToken cancellationToken = default);
+        Task DeleteAsync(int id, CancellationToken cancellationToken = default);
     }
 }

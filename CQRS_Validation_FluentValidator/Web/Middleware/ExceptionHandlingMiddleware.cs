@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text.Json;
-using System.Threading.Tasks;
-using Application.Exceptions;
+﻿using Application.Exceptions;
 using Contracts.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Text.Json;
+using System.Threading.Tasks;
 using ApplicationException = Contracts.Exceptions.ApplicationException;
 
 namespace Web.Middleware

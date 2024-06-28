@@ -1,8 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using Application.Contracts.Users;
-using Application.Users.Commands.CreateUser;
+﻿using Application.Users.Commands.CreateUser;
+using Application.Users.Commands.DeleteUser;
 using Application.Users.Commands.UpdateUser;
 using Application.Users.Queries.GetUserById;
 using Application.Users.Queries.GetUsers;
@@ -11,6 +8,9 @@ using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Presentation.Controllers
 {
@@ -52,7 +52,7 @@ namespace Presentation.Controllers
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>The user with the specified identifier, if it exists.</returns>
         [HttpGet("{userId:int}")]
-        [ProducesResponseType(typeof(UserResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(UserDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetUserById(int userId, CancellationToken cancellationToken)
         {
@@ -70,7 +70,7 @@ namespace Presentation.Controllers
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>The newly created user.</returns>
         [HttpPost]
-        [ProducesResponseType(typeof(UserResponse), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(UserDto), StatusCodes.Status201Created)]
         public async Task<IActionResult> CreateUser([FromBody] CreateUserRequest request, CancellationToken cancellationToken)
         {
             var command = request.Adapt<CreateUserCommand>();
@@ -101,5 +101,18 @@ namespace Presentation.Controllers
 
             return NoContent();
         }
+
+        [HttpDelete("{userId:int}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> DeleteUser(int userId, CancellationToken cancellationToken)
+        {
+            var command = new DeleteUserCommand(userId);
+
+            await _sender.Send(command, cancellationToken);
+
+            return Ok();
+        }
+
     }
 }

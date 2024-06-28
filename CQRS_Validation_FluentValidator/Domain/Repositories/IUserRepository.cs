@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Contracts.Entities;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Contracts.Entities;
 
 namespace Contracts.Repositories
 {
@@ -12,5 +12,7 @@ namespace Contracts.Repositories
         Task<User> GetByIdAsync(int userId, CancellationToken cancellationToken = default);
 
         void Insert(User user);
+        void Update(User user);
+        void Delete(User user);
     }
 }

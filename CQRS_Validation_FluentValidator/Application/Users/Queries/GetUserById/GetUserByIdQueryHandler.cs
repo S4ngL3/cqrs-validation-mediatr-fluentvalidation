@@ -1,12 +1,10 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using Application.Abstractions.Messaging;
-using Application.Contracts.Users;
+﻿using Application.Abstractions.Messaging;
 using Contracts.Dtos.Users;
 using Contracts.Exceptions;
-using Contracts.Repositories;
 using Mapster;
 using Services;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Application.Users.Queries.GetUserById
 {

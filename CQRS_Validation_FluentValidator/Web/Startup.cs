@@ -1,5 +1,3 @@
-using System;
-using System.IO;
 using Application.Behaviors;
 using Contracts.Repositories;
 using FluentValidation;
@@ -14,6 +12,8 @@ using Microsoft.OpenApi.Models;
 using Persistence;
 using Persistence.Repositories;
 using Services;
+using System;
+using System.IO;
 using Web.Middleware;
 
 namespace Web
@@ -39,7 +39,7 @@ namespace Web
 
                 c.IncludeXmlComments(presentationDocumentationFilePath);
 
-                c.SwaggerDoc("v1", new OpenApiInfo {Title = "Web", Version = "v1"});
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Web", Version = "v1" });
             });
 
             services.AddDbContextPool<ApplicationDbContext>(builder =>
