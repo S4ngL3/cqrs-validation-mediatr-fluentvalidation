@@ -19,11 +19,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{34A9601A-F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{06AA82D2-38AE-4E1A-ADF4-1B2F6130AEE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "..\Services\Services.csproj", "{A41FC955-42FF-4608-821F-222515FC59A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "..\Services\Services.csproj", "{A41FC955-42FF-4608-821F-222515FC59A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.Abstractions", "..\Services.Abstractions\Services.Abstractions.csproj", "{DF7EF8F3-71C2-48B0-990B-D3988E965222}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services.Abstractions", "..\Services.Abstractions\Services.Abstractions.csproj", "{DF7EF8F3-71C2-48B0-990B-D3988E965222}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "..\Contracts\Contracts.csproj", "{6FB66CB2-1D3F-4A40-921E-8C155ECD707B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "..\Contracts\Contracts.csproj", "{6FB66CB2-1D3F-4A40-921E-8C155ECD707B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{C008AAD9-7647-4E31-8EAE-9EE761CBA5BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "..\UnitTest\UnitTest.csproj", "{F73104EF-5431-4F3E-93F2-D35BFA2E2E38}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,6 +71,10 @@ Global
 		{6FB66CB2-1D3F-4A40-921E-8C155ECD707B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FB66CB2-1D3F-4A40-921E-8C155ECD707B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FB66CB2-1D3F-4A40-921E-8C155ECD707B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F73104EF-5431-4F3E-93F2-D35BFA2E2E38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F73104EF-5431-4F3E-93F2-D35BFA2E2E38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F73104EF-5431-4F3E-93F2-D35BFA2E2E38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F73104EF-5431-4F3E-93F2-D35BFA2E2E38}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -79,6 +87,7 @@ Global
 		{A41FC955-42FF-4608-821F-222515FC59A1} = {34A9601A-F4A1-49DB-8C59-201E85C7F350}
 		{DF7EF8F3-71C2-48B0-990B-D3988E965222} = {34A9601A-F4A1-49DB-8C59-201E85C7F350}
 		{6FB66CB2-1D3F-4A40-921E-8C155ECD707B} = {34A9601A-F4A1-49DB-8C59-201E85C7F350}
+		{F73104EF-5431-4F3E-93F2-D35BFA2E2E38} = {C008AAD9-7647-4E31-8EAE-9EE761CBA5BE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F7088B24-0DBE-4149-83C5-9BBE47BA04C1}

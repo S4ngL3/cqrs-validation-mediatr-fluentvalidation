@@ -21,13 +21,13 @@ namespace Presentation.Controllers
     [Route("api/[controller]")]
     public sealed class UsersController : ControllerBase
     {
-        private readonly ISender _sender;
+        private readonly IMediator _mediator;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UsersController"/> class.
         /// </summary>
         /// <param name="sender"></param>
-        public UsersController(ISender sender) => _sender = sender;
+        public UsersController(IMediator mediator) => _mediator = mediator;
 
         /// <summary>
         /// Gets all of the users.
@@ -40,7 +40,7 @@ namespace Presentation.Controllers
         {
             var query = new GetUsersQuery();
 
-            var users = await _sender.Send(query, cancellationToken);
+            var users = await _mediator.Send(query, cancellationToken);
 
             return Ok(users);
         }
@@ -58,7 +58,7 @@ namespace Presentation.Controllers
         {
             var query = new GetUserByIdQuery(userId);
 
-            var user = await _sender.Send(query, cancellationToken);
+            var user = await _mediator.Send(query, cancellationToken);
 
             return Ok(user);
         }
@@ -75,7 +75,7 @@ namespace Presentation.Controllers
         {
             var command = request.Adapt<CreateUserCommand>();
 
-            var user = await _sender.Send(command, cancellationToken);
+            var user = await _mediator.Send(command, cancellationToken);
 
             return CreatedAtAction(nameof(GetUserById), new { userId = user.Id }, user);
         }
@@ -97,7 +97,7 @@ namespace Presentation.Controllers
                 UserId = userId
             };
 
-            await _sender.Send(command, cancellationToken);
+            await _mediator.Send(command, cancellationToken);
 
             return NoContent();
         }
@@ -109,7 +109,7 @@ namespace Presentation.Controllers
         {
             var command = new DeleteUserCommand(userId);
 
-            await _sender.Send(command, cancellationToken);
+            await _mediator.Send(command, cancellationToken);
 
             return Ok();
         }

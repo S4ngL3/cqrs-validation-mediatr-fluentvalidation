@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Application.Users.Queries.GetUsers
 {
-    internal sealed class GetUsersQueryHandler : IQueryHandler<GetUsersQuery, IEnumerable<UserDto>>
+    public sealed class GetUsersQueryHandler : IQueryHandler<GetUsersQuery, IEnumerable<UserDto>>
     {
         private readonly IServiceManager _serviceManager;
 
