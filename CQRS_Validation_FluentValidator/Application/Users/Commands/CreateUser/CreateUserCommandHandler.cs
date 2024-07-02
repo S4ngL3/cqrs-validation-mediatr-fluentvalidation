@@ -1,7 +1,9 @@
 ﻿using Application.Abstractions.Messaging;
 using Contracts.Dtos.Users;
+using Contracts.Entities;
+using Contracts.Repositories;
 using Mapster;
-using Services;
+using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -9,18 +11,25 @@ namespace Application.Users.Commands.CreateUser
 {
     internal sealed class CreateUserCommandHandler : ICommandHandler<CreateUserCommand, UserDto>
     {
-        private readonly IServiceManager _serviceManager;
+        private readonly IRepositoryManager _repositoryManager;
 
-        public CreateUserCommandHandler(IServiceManager serviceManager)
+        public CreateUserCommandHandler(IRepositoryManager repositoryManager)
         {
-            _serviceManager = serviceManager;
+            _repositoryManager = repositoryManager;
         }
-
-        public async Task<UserDto> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+        async Task<UserDto> IRequestHandler<CreateUserCommand, UserDto>.Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-            var userForCreateDto = request.Adapt<UserForCreateDto>();
+            var user = new User()
+            {
+                FirstName = request.FirstName,
+                LastName = request.LastName
+            };
 
-            return await _serviceManager.UserService.CreateUserAsync(userForCreateDto, cancellationToken);
+            _repositoryManager.UserRepository.Insert(user);
+
+            await _repositoryManager.UnitOfWork.SaveChangesAsync(cancellationToken);
+
+            return user.Adapt<UserDto>();
         }
     }
 }

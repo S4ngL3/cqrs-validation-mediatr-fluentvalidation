@@ -1,4 +1,6 @@
 ﻿using Application.Abstractions.Messaging;
+using Contracts.Entities;
+using Contracts.Repositories;
 using MediatR;
 using Services;
 using System.Threading;
@@ -8,16 +10,23 @@ namespace Application.Users.Commands.DeleteUser
 {
     internal class DeleteUserCommandHandler : ICommandHandler<DeleteUserCommand, Unit>
     {
-        private readonly IServiceManager _serviceManager;
+        private readonly IRepositoryManager _repositoryManager;
 
-        public DeleteUserCommandHandler(IServiceManager serviceManager)
+        public DeleteUserCommandHandler(IRepositoryManager serviceManager)
         {
-            _serviceManager = serviceManager;
+            _repositoryManager = serviceManager;
         }
 
         public async Task<Unit> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
         {
-            await _serviceManager.UserService.DeleteAsync(request.UserId, cancellationToken);
+            var user = new User
+            {
+                Id = request.UserId
+            };
+
+            _repositoryManager.UserRepository.Delete(user);
+
+            await _repositoryManager.UnitOfWork.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;
         }
