@@ -1,8 +1,7 @@
 ﻿using Application.Abstractions.Messaging;
-using Contracts.Dtos.Users;
-using Mapster;
+using Contracts.Entities;
+using Contracts.Repositories;
 using MediatR;
-using Services;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -10,19 +9,24 @@ namespace Application.Users.Commands.UpdateUser
 {
     internal sealed class UpdateUserCommandHandler : ICommandHandler<UpdateUserCommand, Unit>
     {
-        private readonly IServiceManager _serviceManager;
+        private readonly IRepositoryManager _repositoryManager;
 
-        public UpdateUserCommandHandler(IServiceManager serviceManager)
+        public UpdateUserCommandHandler(IRepositoryManager repositoryManager)
         {
-            _serviceManager = serviceManager;
+            _repositoryManager = repositoryManager;
         }
 
         public async Task<Unit> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
         {
-            var userForUpdateDto = request.Adapt<UserForUpdateDto>();
+            var user = new User
+            {
+                Id = request.UserId,
+                FirstName = request.FirstName,
+                LastName = request.LastName
+            };
 
-            await _serviceManager.UserService.UpdateUserAsync(request.UserId, userForUpdateDto, cancellationToken);
-
+            _repositoryManager.UserRepository.Update(user);
+            await _repositoryManager.UnitOfWork.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;
         }

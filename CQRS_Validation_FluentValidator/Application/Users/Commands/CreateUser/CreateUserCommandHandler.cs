@@ -1,4 +1,5 @@
 ﻿using Application.Abstractions.Messaging;
+using Application.Logging.Commands;
 using Contracts.Dtos.Users;
 using Contracts.Entities;
 using Contracts.Repositories;
@@ -11,10 +12,12 @@ namespace Application.Users.Commands.CreateUser
 {
     internal sealed class CreateUserCommandHandler : ICommandHandler<CreateUserCommand, UserDto>
     {
+        private readonly IMediator _mediator;
         private readonly IRepositoryManager _repositoryManager;
 
-        public CreateUserCommandHandler(IRepositoryManager repositoryManager)
+        public CreateUserCommandHandler(IMediator mediator, IRepositoryManager repositoryManager)
         {
+            _mediator = mediator;
             _repositoryManager = repositoryManager;
         }
         async Task<UserDto> IRequestHandler<CreateUserCommand, UserDto>.Handle(CreateUserCommand request, CancellationToken cancellationToken)
@@ -28,6 +31,8 @@ namespace Application.Users.Commands.CreateUser
             _repositoryManager.UserRepository.Insert(user);
 
             await _repositoryManager.UnitOfWork.SaveChangesAsync(cancellationToken);
+
+            await _mediator.Publish(new UserCreatedNotification() { User = user }, cancellationToken);
 
             return user.Adapt<UserDto>();
         }

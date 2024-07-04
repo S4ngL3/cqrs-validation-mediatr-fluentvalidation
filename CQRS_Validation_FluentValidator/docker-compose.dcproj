@@ -9,14 +9,10 @@
     <DockerServiceName>CQRS.Validation</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="docker-compose - Copy.override.yml">
-      <DependentUpon>docker-compose.yml</DependentUpon>
-    </None>
+	  <None Include="docker-compose-pgpool.override.yml">
+		  <DependentUpon>docker-compose-pgpool.yml</DependentUpon>
+	  </None>
     <None Include="docker-compose-pgpool.yml" />
-    <None Include="docker-compose.override.yml">
-      <DependentUpon>docker-compose.yml</DependentUpon>
-    </None>
-    <None Include="docker-compose.yml" />
     <None Include=".dockerignore" />
   </ItemGroup>
 </Project>

@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "OnionArchitecutre.Web": {
+    "CQRS.Web": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",

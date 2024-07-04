@@ -1,4 +1,5 @@
-﻿using Application.Users.Commands.CreateUser;
+﻿using Application.Logging.Commands;
+using Application.Users.Commands.CreateUser;
 using Application.Users.Commands.DeleteUser;
 using Application.Users.Commands.UpdateUser;
 using Application.Users.Queries.GetUserById;

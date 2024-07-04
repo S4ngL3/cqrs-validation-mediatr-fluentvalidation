@@ -11,7 +11,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Persistence;
 using Persistence.Repositories;
-using Services;
 using System;
 using System.IO;
 using Web.Middleware;
@@ -52,8 +51,6 @@ namespace Web
             services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-            services.AddScoped<IServiceManager, ServiceManager>();
 
             services.AddScoped<IRepositoryManager, RepositoryManager>();
 
