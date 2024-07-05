@@ -11,6 +11,8 @@ using Web.Middleware;
 using Application.Behaviors;
 using FluentValidation;
 using MediatR;
+using Application.Abstractions.Logging;
+using Logging;
 
 namespace Web.Extensions
 {
@@ -27,6 +29,7 @@ namespace Web.Extensions
         }
         public static void ConfigureAppServices(this IServiceCollection services)
         {
+            services.AddSingleton<ILogger, Logger>();
             services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -44,6 +47,10 @@ namespace Web.Extensions
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
             services.AddValidatorsFromAssembly(applicationAssembly);
+        }
+        public static void ConfigureLoggerService(this IServiceCollection services)
+        {
+            services.AddSingleton<ILogger, Logger>();
         }
 
         public static void ConfigureSwagger(this IServiceCollection services)

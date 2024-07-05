@@ -1,7 +1,7 @@
-﻿using Application.Exceptions;
+﻿using Application.Abstractions.Logging;
+using Application.Exceptions;
 using Contracts.Exceptions;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
@@ -12,9 +12,9 @@ namespace Web.Middleware
 {
     internal sealed class ExceptionHandlingMiddleware : IMiddleware
     {
-        private readonly ILogger<ExceptionHandlingMiddleware> _logger;
+        private readonly ILogger _logger;
 
-        public ExceptionHandlingMiddleware(ILogger<ExceptionHandlingMiddleware> logger) => _logger = logger;
+        public ExceptionHandlingMiddleware(ILogger logger) => _logger = logger;
 
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
@@ -24,7 +24,7 @@ namespace Web.Middleware
             }
             catch (Exception e)
             {
-                _logger.LogError(e, e.Message);
+                _logger.Error(e, e.Message);
 
                 await HandleExceptionAsync(context, e);
             }

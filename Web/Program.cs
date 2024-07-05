@@ -4,7 +4,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Persistence;
 using System;
+using System.IO;
 using System.Threading.Tasks;
+using NLog;
 
 namespace Web
 {
@@ -13,6 +15,8 @@ namespace Web
         public static async Task Main(string[] args)
         {
             var webHost = CreateHostBuilder(args).Build();
+
+            LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
 
             await ApplyMigrations(webHost.Services);
 

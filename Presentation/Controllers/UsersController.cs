@@ -1,4 +1,5 @@
-﻿using Application.Logging.Commands;
+﻿using Application.Abstractions.Logging;
+using Application.Logging.Commands;
 using Application.Users.Commands.CreateUser;
 using Application.Users.Commands.DeleteUser;
 using Application.Users.Commands.UpdateUser;
@@ -22,13 +23,17 @@ namespace Presentation.Controllers
     [Route("api/[controller]")]
     public sealed class UsersController : ControllerBase
     {
+        private readonly ILogger _logger;
         private readonly IMediator _mediator;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UsersController"/> class.
         /// </summary>
         /// <param name="sender"></param>
-        public UsersController(IMediator mediator) => _mediator = mediator;
+        public UsersController(ILogger logger, IMediator mediator) {
+            _logger = logger;
+            _mediator = mediator; 
+        }
 
         /// <summary>
         /// Gets all of the users.
@@ -40,8 +45,10 @@ namespace Presentation.Controllers
         public async Task<IActionResult> GetUsers(CancellationToken cancellationToken)
         {
             var query = new GetUsersQuery();
+            _logger.Info(query);
 
             var users = await _mediator.Send(query, cancellationToken);
+            _logger.Info(users);
 
             return Ok(users);
         }

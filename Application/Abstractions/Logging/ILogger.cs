@@ -19,7 +19,7 @@ namespace Application.Abstractions.Logging
         void Debug(object message, Exception exception);
         void Info(object message, Exception exception);
         void Warn(object message, Exception exception);
-        void Error(object message, Exception exception);
+        void Error(Exception exception, object message);
         void Fatal(object message, Exception exception);
 
         /* Log an exception including the stack trace of exception. */

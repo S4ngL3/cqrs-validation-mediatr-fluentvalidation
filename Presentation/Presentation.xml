@@ -9,7 +9,7 @@
             The users controller.
             </summary>
         </member>
-        <member name="M:Presentation.Controllers.UsersController.#ctor(MediatR.IMediator)">
+        <member name="M:Presentation.Controllers.UsersController.#ctor(Application.Abstractions.Logging.ILogger,MediatR.IMediator)">
             <summary>
             Initializes a new instance of the <see cref="T:Presentation.Controllers.UsersController"/> class.
             </summary>
