@@ -13,6 +13,7 @@ using Persistence;
 using Persistence.Repositories;
 using System;
 using System.IO;
+using Web.Extensions;
 using Web.Middleware;
 
 namespace Web
@@ -30,39 +31,13 @@ namespace Web
             services.AddControllers()
                 .AddApplicationPart(presentationAssembly);
 
-            services.AddSwaggerGen(c =>
-            {
-                string presentationDocumentationFile = $"{presentationAssembly.GetName().Name}.xml";
+            services.ConfigureDBContext(Configuration);
 
-                string presentationDocumentationFilePath = Path.Combine(AppContext.BaseDirectory, presentationDocumentationFile);
+            services.ConfigureSwagger();
 
-                c.IncludeXmlComments(presentationDocumentationFilePath);
+            services.ConfigureAppServices();
 
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Web", Version = "v1" });
-            });
-
-            services.AddDbContextPool<ApplicationDbContext>(builder =>
-            {
-                var connectionString = Configuration.GetConnectionString("Database");
-
-                builder.UseNpgsql(connectionString);
-            });
-
-            services.AddScoped<IUserRepository, UserRepository>();
-
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-            services.AddScoped<IRepositoryManager, RepositoryManager>();
-
-            services.AddTransient<ExceptionHandlingMiddleware>();
-
-            var applicationAssembly = typeof(Application.AssemblyReference).Assembly;
-
-            services.AddMediatR(applicationAssembly);
-
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
-
-            services.AddValidatorsFromAssembly(applicationAssembly);
+            services.ConfigureMediatR();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
