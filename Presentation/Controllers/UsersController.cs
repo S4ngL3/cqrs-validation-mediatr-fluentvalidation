@@ -29,7 +29,8 @@ namespace Presentation.Controllers
         /// <summary>
         /// Initializes a new instance of the <see cref="UsersController"/> class.
         /// </summary>
-        /// <param name="sender"></param>
+        /// <param name="logger"></param>
+        /// <param name="mediator"></param>
         public UsersController(ILogger logger, IMediator mediator) {
             _logger = logger;
             _mediator = mediator; 

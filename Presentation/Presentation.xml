@@ -4,6 +4,11 @@
         <name>Presentation</name>
     </assembly>
     <members>
+        <member name="T:Presentation.AssemblyReference">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Presentation.Controllers.UsersController">
             <summary>
             The users controller.
@@ -13,7 +18,8 @@
             <summary>
             Initializes a new instance of the <see cref="T:Presentation.Controllers.UsersController"/> class.
             </summary>
-            <param name="sender"></param>
+            <param name="logger"></param>
+            <param name="mediator"></param>
         </member>
         <member name="M:Presentation.Controllers.UsersController.GetUsers(System.Threading.CancellationToken)">
             <summary>

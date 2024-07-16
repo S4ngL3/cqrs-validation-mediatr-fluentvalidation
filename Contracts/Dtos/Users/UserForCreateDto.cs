@@ -6,10 +6,10 @@ namespace Contracts.Dtos.Users
     {
         [Required(ErrorMessage = "FirstName is required")]
         [StringLength(100, ErrorMessage = "FirstName can't be longer than 100 characters")]
-        public string FirstName { get; set; }
+        public required string FirstName { get; set; }
 
         [Required(ErrorMessage = "LastName is required")]
         [StringLength(100, ErrorMessage = "LastName can't be longer than 100 characters")]
-        public string LastName { get; set; }
+        public required string LastName { get; set; }
     }
 }

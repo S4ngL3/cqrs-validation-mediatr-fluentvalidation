@@ -16,12 +16,13 @@ namespace UnitTest
         public UsersTest()
         {
             _mediator = new Mock<IMediator>();
+            _logger = new Mock<ILogger>();
             _usersController = new UsersController(_logger.Object, _mediator.Object);
             _repositoryManager = new Mock<IRepositoryManager>();
         }
 
         [Fact]
-        public async void GetUsersTest()
+        public void GetUsersTest()
         {
             var res = _usersController.GetUsers(new CancellationToken());
 
