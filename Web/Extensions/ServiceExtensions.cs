@@ -30,6 +30,7 @@ namespace Web.Extensions
         public static void ConfigureAppServices(this IServiceCollection services)
         {
             services.AddSingleton<ILogger, Logger>();
+
             services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -48,11 +49,6 @@ namespace Web.Extensions
 
             services.AddValidatorsFromAssembly(applicationAssembly);
         }
-        public static void ConfigureLoggerService(this IServiceCollection services)
-        {
-            services.AddSingleton<ILogger, Logger>();
-        }
-
         public static void ConfigureSwagger(this IServiceCollection services)
         {
             var presentationAssembly = typeof(Presentation.AssemblyReference).Assembly;

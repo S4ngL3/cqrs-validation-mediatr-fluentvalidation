@@ -47,5 +47,13 @@
             <param name="cancellationToken">The cancellation token.</param>
             <returns>No content.</returns>
         </member>
+        <member name="M:Presentation.Controllers.UsersController.DeleteUser(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Delete the user by Id
+            </summary>
+            <param name="userId"></param>
+            <param name="cancellationToken"></param>
+            <returns>OK</returns>
+        </member>
     </members>
 </doc>

@@ -16,7 +16,7 @@ namespace Web
         {
             var webHost = CreateHostBuilder(args).Build();
 
-            LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
+            LogManager.Setup().LoadConfigurationFromFile(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
 
             await ApplyMigrations(webHost.Services);
 

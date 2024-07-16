@@ -110,8 +110,14 @@ namespace Presentation.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Delete the user by Id
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>OK</returns>
         [HttpDelete("{userId:int}")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DeleteUser(int userId, CancellationToken cancellationToken)
         {
