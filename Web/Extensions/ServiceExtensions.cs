@@ -49,6 +49,14 @@ namespace Web.Extensions
 
             services.AddValidatorsFromAssembly(applicationAssembly);
         }
+        public static void ConfigureCaching(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = configuration.GetConnectionString("RedisConn");
+                options.InstanceName = "Users";
+            });
+        }
         public static void ConfigureSwagger(this IServiceCollection services)
         {
             var presentationAssembly = typeof(Presentation.AssemblyReference).Assembly;

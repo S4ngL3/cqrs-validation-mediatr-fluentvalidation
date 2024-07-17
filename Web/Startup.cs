@@ -38,6 +38,8 @@ namespace Web
             services.ConfigureAppServices();
 
             services.ConfigureMediatR();
+
+            services.ConfigureCaching(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
